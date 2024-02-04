@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=OpenArena Server
+Comment=Run an OpenArena server
+Exec=openarena-server
+Icon=openarena-server
+Type=Application
+Terminal=true
+Categories=Network;Game;

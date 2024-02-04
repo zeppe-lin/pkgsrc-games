@@ -1,0 +1,12 @@
+diff -rupN a/pcsxr/libpcsxcore/ix86_64/ix86-64.c b/pcsxr/libpcsxcore/ix86_64/ix86-64.c
+--- a/pcsxr/libpcsxcore/ix86_64/ix86-64.c	2023-09-03 14:50:42.823209903 +0200
++++ b/pcsxr/libpcsxcore/ix86_64/ix86-64.c	2023-09-03 14:52:00.267245712 +0200
+@@ -157,7 +157,7 @@ void MEMADDR_OP(bool w, unsigned opl, u6
+ 	}
+ 	else
+ 	{
+-		assert(!isreg || reg != X86_TEMP);
++		//assert(!isreg || reg != X86_TEMP);
+ 		MOV64ItoR(X86_TEMP, p);
+ 		writeVARROP(RexRB(w, reg, X86_TEMP), opl, op);
+ 		ModRM(0, reg, X86_TEMP);

@@ -1,0 +1,39 @@
+# Description: Team-based tactical shooter based on the Quake 3 Engine
+# URL:         http://www.urbanterror.info/
+# Depends on:  curl libsdl
+
+name=urbanterror-bin
+version=4.3.4
+release=1
+source="http://www.happyurtday.com/releases/4x/UrbanTerror$(echo $version | tr -d .)_full.zip
+	urbanterror.desktop
+	urbanterror.png
+	urbanterror.sh
+	urbanterror-server.sh"
+
+build() {
+	mkdir -p $PKG/opt/urbanterror
+
+	cd $PKG/opt/urbanterror
+
+	install -m 0755 $SRC/UrbanTerror43/Quake3-UrT.x86_64 urbanterror
+	install -m 0755 $SRC/UrbanTerror43/Quake3-UrT-Ded.x86_64 urbanterror-ded
+
+	cp -r $SRC/UrbanTerror43/q3ut4 .
+
+	cat <<EOF >> $PKG/opt/urbanterror/q3ut4/autoexec.cfg
+
+seta cl_cURLLib "/usr/lib/libcurl.so.4"
+seta r_fullscreen 0
+
+EOF
+
+	# TODO: desktop launcher for urbanterror-server
+	install -m 0644 -D $SRC/urbanterror.desktop \
+		$PKG/usr/share/applications/urbanterror.desktop
+	install -m 0644 -D $SRC/urbanterror.png \
+		$PKG/usr/share/pixmaps/urbanterror.png
+
+	install -m 0755 -D $SRC/urbanterror.sh $PKG/usr/bin/urbanterror
+	install -m 0755 -D $SRC/urbanterror-server.sh $PKG/usr/bin/urbanterror-server
+}

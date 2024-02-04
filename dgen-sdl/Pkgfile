@@ -1,0 +1,20 @@
+# Description: Emulator for Sega Genesis/Mega Drive systems ported to SDL
+# URL:         https://dgen.sourceforge.net/
+# Depends on:  libarchive libsdl
+
+name=dgen-sdl
+version=1.33
+release=1
+source=https://downloads.sourceforge.net/dgen/$name-$version.tar.gz
+
+build() {
+	mkdir build; cd build
+
+	../$name-$version/configure  \
+		--prefix=/usr        \
+		--without-doxygen    \
+		--disable-sdltest    \
+
+	make V=1
+	make DESTDIR=$PKG install
+}

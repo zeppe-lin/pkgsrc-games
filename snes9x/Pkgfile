@@ -1,0 +1,22 @@
+# Description: Super Nintendo Entertainment System emulator
+# URL:         https://www.snes9x.com/
+# Depends on:  alsa-lib libpng xorg-libsm xorg-libxinerama xorg-libxv
+
+name=snes9x
+version=1.62.3
+release=1
+source=https://github.com/snes9xgit/$name/archive/$version/$name-$version.tar.gz
+
+build() {
+	cd $name-$version/unix
+
+	autoreconf -fiv
+	./configure                      \
+		--prefix=/usr            \
+		--mandir=/usr/share/man  \
+
+	make V=1
+
+	install -m 0755 -Dt $PKG/usr/bin/    snes9x
+	install -m 0644 -Dt $PKG/etc/snes9x/ snes9x.conf.default
+}

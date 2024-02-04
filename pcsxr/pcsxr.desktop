@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=PCSXR
+GenericName=Sony PlayStation Emulator
+Comment=Sony PlayStation emulator
+Exec=pcsxr
+Icon=pcsxr-icon
+Categories=Game;Emulator;

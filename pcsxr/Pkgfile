@@ -1,0 +1,53 @@
+# Description: Sony PlayStation 1 emulator
+# URL:         https://github.com/pcsxr
+# Depends on:  gtk3 libarchive libcdio libsdl xorg-libxtst
+
+name=pcsxr
+version=1.9.95
+release=1
+source="https://github.com/frealgagu/PCSX-Reloaded/archive/$version/PCSX-Reloaded-$version.tar.gz
+	01-pcsxr-fix-uncompress2.patch
+	02-pcsxr-fix-undefined-operations.patch
+	03-pcsxr-remove-assertion-64bit.patch
+	04-add_missing_gte_shift_declaration_in_gte_h.patch
+	05-remove_assert_in_ix86_64.patch
+	pcsxr.desktop"
+
+build() {
+	cd PCSX-Reloaded-$version
+
+	patch -p1 -i $SRC/01-pcsxr-fix-uncompress2.patch
+	patch -p1 -i $SRC/02-pcsxr-fix-undefined-operations.patch
+	patch -p1 -i $SRC/03-pcsxr-remove-assertion-64bit.patch
+	patch -p1 -i $SRC/04-add_missing_gte_shift_declaration_in_gte_h.patch
+	#patch -p1 -i $SRC/05-remove_assert_in_ix86_64.patch
+
+	# build in separate dir is broken
+	cd $name
+
+	# fix icon in about dialog
+	sed -i '/logo_icon_name/d' data/pcsxr.ui
+
+	# fix version in about dialog
+	sed -i "/^#define ABOUT_VERSION/s/svn/$version/" gui/AboutDlg.c
+
+	sh autogen.sh
+	intltoolize --force
+
+	# --enable-sound supported audio backends:
+	# alsa, null, oss, pulseaudio, sdl, openal
+	CFLAGS="-fcommon -I/usr/include/harfbuzz"  \
+	./configure                                \
+		--prefix=/usr                      \
+		--mandir=/usr/share/man            \
+		--disable-nls                      \
+		--enable-libcdio                   \
+		--enable-opengl                    \
+		--enable-sound=alsa                \
+
+	make V=1
+	make DESTDIR=$PKG install
+
+	install -m 0644 -Dt $PKG/usr/share/applications/ \
+		$SRC/pcsxr.desktop
+}

@@ -1,0 +1,12 @@
+diff -rupN a/pcsxr/libpcsxcore/gte.h b/pcsxr/libpcsxcore/gte.h
+--- a/pcsxr/libpcsxcore/gte.h	2023-09-03 14:39:29.370491487 +0200
++++ b/pcsxr/libpcsxcore/gte.h	2023-09-03 14:40:09.340847215 +0200
+@@ -57,6 +57,8 @@ void gteGPF();
+ void gteGPL();
+ void gteNCCT();
+ 
++s64 gte_shift(s64, int);
++
+ #ifdef __cplusplus
+ }
+ #endif
