@@ -3,7 +3,7 @@ OVERVIEW
 This directory contains **games** pkgsrc collection.  This collection
 contains build scripts and files for the games and emulators packages.
 Packages in this collection should depends **only** on the
-**desktop**, **xorg**, **system** and**core** pkgsrc collections.
+**desktop**, **xorg**, **system** and **core** pkgsrc collections.
 
 
 LICENSE
