@@ -16,6 +16,7 @@ drwxr-xr-x	root/root	opt/openarena/baseoa/
 -rw-r--r--	root/root	opt/openarena/baseoa/pak6-misc.pk3
 -rw-r--r--	root/root	opt/openarena/baseoa/pak6-patch085.pk3
 -rw-r--r--	root/root	opt/openarena/baseoa/pak6-patch088.pk3
+-rw-r--r--	root/root	opt/openarena/baseoa/q3config.cfg
 drwxr-xr-x	root/root	opt/openarena/missionpack/
 -rw-r--r--	root/root	opt/openarena/missionpack/mp-pak0.pk3
 -rwxr-xr-x	root/root	opt/openarena/oa_ded.i386

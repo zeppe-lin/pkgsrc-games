@@ -4,7 +4,7 @@
 
 name=openarena-bin
 version=0.8.8
-release=1
+release=2
 source="http://download.tuxfamily.org/openarena/rel/$(echo $version | tr -d .)/openarena-$version.zip
 	openarena-runner.sh
 	openarena.png
@@ -28,6 +28,10 @@ build() {
 	chmod 0755 $PKG/opt/openarena/*.i386
 	chmod 0755 $PKG/opt/openarena/*.x86_64
 
+	# prevent fullscreen on start, let the user configure the resolution
+	cat > $PKG/opt/openarena/baseoa/q3config.cfg <<EOF
+seta r_fullscreen "0"
+EOF
 	install -m 0644 -Dt $PKG/usr/share/pixmaps/ \
 		$SRC/openarena.png $SRC/openarena-server.png
 	install -m 0644 -Dt $PKG/usr/share/applications/ \
