@@ -1,6 +1,7 @@
 # Description: Violent, sexy, multiplayer FPS based on the Quake 3 Engine
 # URL:         http://openarena.ws/
 # Depends on:  curl glibc-32 libsdl libvorbis
+# Optional:    openal
 
 name=openarena-bin
 version=0.8.8
