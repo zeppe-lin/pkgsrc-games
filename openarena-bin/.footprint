@@ -19,17 +19,15 @@ drwxr-xr-x	root/root	opt/openarena/baseoa/
 -rw-r--r--	root/root	opt/openarena/baseoa/q3config.cfg
 drwxr-xr-x	root/root	opt/openarena/missionpack/
 -rw-r--r--	root/root	opt/openarena/missionpack/mp-pak0.pk3
--rwxr-xr-x	root/root	opt/openarena/oa_ded.i386
 -rwxr-xr-x	root/root	opt/openarena/oa_ded.x86_64
--rwxr-xr-x	root/root	opt/openarena/openarena-runner.sh
--rwxr-xr-x	root/root	opt/openarena/openarena.i386
+-rwxr-xr-x	root/root	opt/openarena/openarena-launcher.sh
 -rwxr-xr-x	root/root	opt/openarena/openarena.x86_64
 -rw-r--r--	root/root	opt/openarena/readme_085.txt
 -rw-r--r--	root/root	opt/openarena/readme_088.txt
 drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/bin/
-lrwxrwxrwx	root/root	usr/bin/openarena -> /opt/openarena/openarena-runner.sh
-lrwxrwxrwx	root/root	usr/bin/openarena-server -> /opt/openarena/openarena-runner.sh
+lrwxrwxrwx	root/root	usr/bin/openarena -> /opt/openarena/openarena-launcher.sh
+lrwxrwxrwx	root/root	usr/bin/openarena-server -> /opt/openarena/openarena-launcher.sh
 drwxr-xr-x	root/root	usr/share/
 drwxr-xr-x	root/root	usr/share/applications/
 -rw-r--r--	root/root	usr/share/applications/openarena-server.desktop

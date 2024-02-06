@@ -5,9 +5,9 @@
 
 name=openarena-bin
 version=0.8.8
-release=2
+release=3
 source="http://download.tuxfamily.org/openarena/rel/$(echo $version | tr -d .)/openarena-$version.zip
-	openarena-runner.sh
+	openarena-launcher.sh
 	openarena.png
 	openarena-server.png
 	openarena.desktop
@@ -16,7 +16,7 @@ source="http://download.tuxfamily.org/openarena/rel/$(echo $version | tr -d .)/o
 build() {
 	# remove junk
 	cd openarena-$version
-	rm *.dll *.exe
+	rm *.dll *.exe *.i386
 	rm -rf __MACOSX *.app
 	cd -
 
@@ -26,20 +26,26 @@ build() {
 	mv openarena-$version $PKG/opt/openarena
 	find $PKG/opt/openarena -type f -exec chmod 0644 {} \;
 	find $PKG/opt/openarena -type d -exec chmod 0755 {} \;
-	chmod 0755 $PKG/opt/openarena/*.i386
 	chmod 0755 $PKG/opt/openarena/*.x86_64
 
 	# prevent fullscreen on start, let the user configure the resolution
 	cat > $PKG/opt/openarena/baseoa/q3config.cfg <<EOF
 seta r_fullscreen "0"
 EOF
+
+	# pixmaps
 	install -m 0644 -Dt $PKG/usr/share/pixmaps/ \
-		$SRC/openarena.png $SRC/openarena-server.png
+		$SRC/openarena.png     $SRC/openarena-server.png
+
+	# launcher
+	cp $SRC/openarena-launcher.sh $PKG/opt/openarena/
+	chmod 0755 $PKG/opt/openarena/openarena-launcher.sh
+
+	# freedesktop.org launchers
 	install -m 0644 -Dt $PKG/usr/share/applications/ \
 		$SRC/openarena.desktop $SRC/openarena-server.desktop
 
-	install -m 0755 -Dt $PKG/opt/openarena/ \
-		$SRC/openarena-runner.sh
-	ln -s /opt/openarena/openarena-runner.sh $PKG/usr/bin/openarena
-	ln -s /opt/openarena/openarena-runner.sh $PKG/usr/bin/openarena-server
+	# /usr/bin symlinks
+	ln -s /opt/openarena/openarena-launcher.sh $PKG/usr/bin/openarena
+	ln -s /opt/openarena/openarena-launcher.sh $PKG/usr/bin/openarena-server
 }
