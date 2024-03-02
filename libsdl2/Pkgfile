@@ -1,0 +1,36 @@
+# Description: SDL version 2, Simple DirectMedia Layer
+# URL:         https://www.libsdl.org/
+# Depends on:  mesa
+# Optional:    alsa-lib ibus jack pipewire pulseaudio wayland-protocols
+
+name=libsdl2
+version=2.28.5
+release=1
+source=https://www.libsdl.org/release/SDL2-$version.tar.gz
+
+build() {
+	pkgman isinst alsa-lib          && PKGMK_SDL2="$PKGMK_SDL2 -D SDL_ALSA_SHARED=ON"
+	pkgman isinst ibus              && PKGMK_SDL2="$PKGMK_SDL2 -D SDL_USE_IME=ON"
+	pkgman isinst jack              && PKGMK_SDL2="$PKGMK_SDL2 -D SDL_JACK_SHARED=ON"
+	pkgman isinst pipewire          && PKGMK_SDL2="$PKGMK_SDL2 -D SDL_PIPEWIRE_SHARED=ON"
+	pkgman isinst pulseaudio        && PKGMK_SDL2="$PKGMK_SDL2 -D SDL_PULSEAUDIO_SHARED=ON"
+	pkgman isinst wayland-protocols && PKGMK_SDL2="$PKGMK_SDL2 -D SDL_WAYLAND_SHARED=ON"
+
+	[ -z $CCACHE_PREFIX ] || unset CCACHE_PREFIX
+
+	cmake -S SDL2-$version -B build -G Ninja        \
+		-D CMAKE_INSTALL_PREFIX=/usr            \
+		-D CMAKE_INSTALL_LIBDIR=lib             \
+		-D CMAKE_BUILD_TYPE=Release             \
+		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS"  \
+		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS"      \
+		-D SDL_CLOCK_GETTIME=ON                 \
+		-D SDL_RPATH=OFF                        \
+		$PKGMK_SDL2
+
+	ninja -C build -j ${JOBS:-1} -v
+	DESTDIR=$PKG ninja -C build install
+
+	# remove junk
+	rm -r $PKG/usr/share/licenses
+}
