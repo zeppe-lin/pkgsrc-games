@@ -1,0 +1,24 @@
+# Description: Post-Apocalyptic DOOM2-Mod (Episode 2: Afterglow)
+# URL:         https://www.moddb.com/mods/ashes-2063
+# Depends on:  freedoom
+
+name=ashes-2063-2
+version=1.15
+release=1
+source="https://download1326.mediafire.com/v80ufusixeogvP6lgTueVg5ce6MWSzHx822fSKZRO_y5FQhVQrRyt2WgjLCIhXirS0iuWUsIjoDv16w5oNG6JxAXxtnUxTWalNj6-40L3T2vUUMZCmBYPmh-vsO7iHrXlxkdUOidSoRboNTgaDE7cm_O1fcIKMVxNpEG_V1746tjOKEk/8gbadswjokjgr19/AshesAfterglow1_15.pk3
+	ashes-2063-2.desktop
+	ashes-2063-2.sh
+	ashes-2063-2.png"
+
+build() {
+	mkdir -p $PKG/usr/share/games/$name
+	mkdir -p $PKG/usr/share/applications
+	mkdir -p $PKG/usr/share/pixmaps
+	mkdir -p $PKG/usr/bin
+
+	mv *.pk3 $PKG/usr/share/games/$name/
+
+	install -m 0755 $SRC/$name.sh       $PKG/usr/bin/$name
+	install -m 0644 $SRC/$name.desktop  $PKG/usr/share/applications/
+	install -m 0644 $SRC/$name.png      $PKG/usr/share/pixmaps/
+}
