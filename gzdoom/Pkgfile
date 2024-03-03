@@ -1,0 +1,40 @@
+# Description: Feature centric ports for all Doom engine games
+# URL:         http://www.zdoom.org/
+# Depends on:  gtk3 libsdl2 libvpx libwebp openal zmusic
+
+name=gzdoom
+version=4.11.3-ef4c4ee
+release=1
+source="https://github.com/ZDoom/$name/archive/${version#*-}/$name-$version.tar.gz
+	fix-file-paths.patch
+	gzdoom.desktop"
+
+build() {
+	patch -d $name-${version#*-}* -p1 -i $SRC/fix-file-paths.patch
+
+	CXXFLAGS="$CXXFLAGS -ffile-prefix-map=\"$PWD\"=."
+	CXXFLAGS="$CXXFLAGS -DSHARE_DIR=\\\"/usr/share/gzdoom\\\""
+
+	cmake -S $name-${version#*-}* -B build -G Ninja  \
+		-D CMAKE_BUILD_TYPE=Release              \
+		-D CMAKE_CXX_FLAGS="$CXXFLAGS"           \
+		-D CMAKE_INSTALL_PREFIX=/usr             \
+		-D CMAKE_INSTALL_LIBDIR=lib              \
+		-D SYSTEMINSTALL=ON                      \
+		-D INSTALL_PK3_PATH=share/gzdoom         \
+		-D INSTALL_SOUNDFONT_PATH=share/gzdoom   \
+		-D INSTALL_RPATH=/usr/lib                \
+		-D DYN_GTK=OFF                           \
+		-D NO_GTK=OFF                            \
+		-D DYN_OPENAL=OFF                        \
+
+	ninja -C build -j ${JOBS:-1} -v
+	DESTDIR=$PKG ninja -C build install
+
+	install -m 0644 -Dt $PKG/usr/share/applications/ $SRC/gzdoom.desktop
+	install -m 0644 -D $SRC/$name-*/src/posix/zdoom.xpm \
+		$PKG/usr/share/icons/hicolor/256x256/apps/gzdoom.xpm
+
+	# remove junk
+	rm -r $PKG/usr/share/doc
+}
