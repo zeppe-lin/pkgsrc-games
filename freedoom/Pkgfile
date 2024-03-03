@@ -1,0 +1,27 @@
+# Description: Games based on the Doom engine
+# URL:         https://github.com/freedoom/freedoom
+# Depends on:  gzdoom
+
+name=freedoom
+version=0.13.0
+release=1
+source="https://github.com/$name/$name/releases/download/v$version/$name-$version.zip
+	freedoom1.desktop
+	freedoom1.sh
+	freedoom2.desktop
+	freedoom2.sh
+	freedoom.png"
+
+build() {
+	mkdir -p $PKG/usr/bin
+	mkdir -p $PKG/usr/share/doom
+	mkdir -p $PKG/usr/share/pixmaps
+	mkdir -p $PKG/usr/share/applications
+
+	install -m 0644 $name-$version/*.wad  $PKG/usr/share/doom/
+
+	install -m 0755 $SRC/freedoom1.sh     $PKG/usr/bin/freedoom1
+	install -m 0755 $SRC/freedoom2.sh     $PKG/usr/bin/freedoom2
+	install -m 0644 $SRC/freedoom.png     $PKG/usr/share/pixmaps/
+	install -m 0644 $SRC/*.desktop        $PKG/usr/share/applications/
+}

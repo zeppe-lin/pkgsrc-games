@@ -1,0 +1,13 @@
+drwxr-xr-x	root/root	usr/
+drwxr-xr-x	root/root	usr/bin/
+-rwxr-xr-x	root/root	usr/bin/freedoom1
+-rwxr-xr-x	root/root	usr/bin/freedoom2
+drwxr-xr-x	root/root	usr/share/
+drwxr-xr-x	root/root	usr/share/applications/
+-rw-r--r--	root/root	usr/share/applications/freedoom1.desktop
+-rw-r--r--	root/root	usr/share/applications/freedoom2.desktop
+drwxr-xr-x	root/root	usr/share/doom/
+-rw-r--r--	root/root	usr/share/doom/freedoom1.wad
+-rw-r--r--	root/root	usr/share/doom/freedoom2.wad
+drwxr-xr-x	root/root	usr/share/pixmaps/
+-rw-r--r--	root/root	usr/share/pixmaps/freedoom.png
