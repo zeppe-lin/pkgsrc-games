@@ -1,0 +1,24 @@
+# Description: Post-Apocalyptic DOOM2-Mod (Episode 1 & Dead Man Walking expansion)
+# URL:         https://www.moddb.com/mods/ashes-2063
+# Depends on:  freedoom
+
+name=ashes-2063-1
+version=2.3
+release=1
+source="https://download1323.mediafire.com/56duabwrgmdgOmPB9J-GOffNb-ygV59VqOdOlWozTmnI1W3S69g1WZP86H3cuFVwtOXf7iEm5bBw9JALJ8gHS9BDyxqnfzYfe-69uAOz_zw8x25xjEygQ3gVKlHHqAj6qX6hLpVdXQrf4p1tF1eiEvCPIxaaxgJIIpEQnmZ-RDoXgRoY/dzyp44gxg573wff/Ashes2063Enriched2_23.pk3
+	ashes-2063-1.desktop
+	ashes-2063-1.sh
+	ashes-2063-1.png"
+
+build() {
+	mkdir -p $PKG/usr/share/games/$name
+	mkdir -p $PKG/usr/share/applications
+	mkdir -p $PKG/usr/share/pixmaps
+	mkdir -p $PKG/usr/bin
+
+	mv *.pk3 $PKG/usr/share/games/$name/
+
+	install -m 0755 $SRC/$name.sh       $PKG/usr/bin/$name
+	install -m 0644 $SRC/$name.desktop  $PKG/usr/share/applications/
+	install -m 0644 $SRC/$name.png      $PKG/usr/share/pixmaps/
+}
