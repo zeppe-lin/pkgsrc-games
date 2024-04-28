@@ -11,8 +11,8 @@ drwxr-xr-x	root/root	usr/lib/cmake/ZMusic/
 -rw-r--r--	root/root	usr/lib/cmake/ZMusic/ZMusicLiteTargets-release.cmake
 -rw-r--r--	root/root	usr/lib/cmake/ZMusic/ZMusicLiteTargets.cmake
 lrwxrwxrwx	root/root	usr/lib/libzmusic.so -> libzmusic.so.1
-lrwxrwxrwx	root/root	usr/lib/libzmusic.so.1 -> libzmusic.so.1.1.12
--rwxr-xr-x	root/root	usr/lib/libzmusic.so.1.1.12
+lrwxrwxrwx	root/root	usr/lib/libzmusic.so.1 -> libzmusic.so.1.1.13
+-rwxr-xr-x	root/root	usr/lib/libzmusic.so.1.1.13
 lrwxrwxrwx	root/root	usr/lib/libzmusiclite.so -> libzmusiclite.so.1
-lrwxrwxrwx	root/root	usr/lib/libzmusiclite.so.1 -> libzmusiclite.so.1.1.12
--rwxr-xr-x	root/root	usr/lib/libzmusiclite.so.1.1.12
+lrwxrwxrwx	root/root	usr/lib/libzmusiclite.so.1 -> libzmusiclite.so.1.1.13
+-rwxr-xr-x	root/root	usr/lib/libzmusiclite.so.1.1.13
