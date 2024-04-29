@@ -1,0 +1,13 @@
+--- scanmem.1.orig	2024-04-29 21:16:59.939389477 +0300
++++ scanmem.1	2024-04-29 21:18:37.775498391 +0300
+@@ -482,8 +482,6 @@
+ All bug reports, suggestions or feedback welcome.
+ 
+ .SH SEE ALSO
+-gameconqueror(1)
+-ptrace(2)
+-proc(5)
+-nethack(6)
++ptrace(2),
++proc(5),
+ pidof(8)
