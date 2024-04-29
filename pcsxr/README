@@ -4,7 +4,7 @@ REQUIREMENTS
 
 	libarchive: Enable compressed data-tracks support.
 	libcdio:    Enable CD-ROM support.
-	  libcdda:  Enable compressed CDDA support.
+	libcdda:    Enable compressed CDDA support.
 
 NOTES
 
