@@ -4,7 +4,7 @@
 # Optional:    alsa-lib ibus jack pipewire pulseaudio wayland-protocols
 
 name=libsdl2
-version=2.30.4
+version=2.30.5
 release=1
 source=https://www.libsdl.org/release/SDL2-$version.tar.gz
 
