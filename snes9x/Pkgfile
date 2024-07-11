@@ -3,7 +3,7 @@
 # Depends on:  alsa-lib libpng xorg-libsm xorg-libxinerama xorg-libxv
 
 name=snes9x
-version=1.62.3
+version=1.63
 release=1
 source=https://github.com/snes9xgit/$name/archive/$version/$name-$version.tar.gz
 
