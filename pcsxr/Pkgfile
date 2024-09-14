@@ -4,7 +4,7 @@
 
 name=pcsxr
 version=1.9.95
-release=1
+release=2
 source="https://github.com/frealgagu/PCSX-Reloaded/archive/$version/PCSX-Reloaded-$version.tar.gz
 	01-pcsxr-fix-uncompress2.patch
 	02-pcsxr-fix-undefined-operations.patch
