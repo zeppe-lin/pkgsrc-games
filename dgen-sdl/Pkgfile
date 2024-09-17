@@ -4,7 +4,7 @@
 
 name=dgen-sdl
 version=1.33
-release=1
+release=2
 source=https://downloads.sourceforge.net/dgen/$name-$version.tar.gz
 
 build() {
