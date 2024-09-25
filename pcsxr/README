@@ -4,9 +4,11 @@ README pcsxr
 REQUIREMENTS
 ============
 
-libarchive: Enable compressed data-tracks support.
-libcdio:    Enable CD-ROM support.
-libcdda:    Enable compressed CDDA support.
+Build time
+----------
+libarchive:  Enable compressed data-tracks support.
+libcdio:     Enable CD-ROM support.
+libcdda:     Enable compressed CDDA support.
 
 
 NOTES
