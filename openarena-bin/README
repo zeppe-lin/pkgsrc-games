@@ -4,7 +4,7 @@ README openarena-bin
 REQUIREMENTS
 ============
 
-openal (optional) for surround sound
+openal (optional): Support surround sound.
 
 
 End of file.
