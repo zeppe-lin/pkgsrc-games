@@ -3,7 +3,7 @@
 # Depends on:  gtk3 libsdl2 libvpx libwebp openal zmusic
 
 name=gzdoom
-version=4.12.2-4625d4a
+version=4.12.2-85ae8f8
 release=1
 source="https://github.com/ZDoom/$name/archive/${version#*-}/$name-$version.tar.gz
 	fix-file-paths.patch
