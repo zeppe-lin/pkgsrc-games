@@ -1,0 +1,24 @@
+# Description: Ashes: Hard Reset (Episode 2 Prequel)
+# URL:         https://www.moddb.com/mods/ashes-2063
+# Depends on:  freedoom
+
+name=ashes-hard-reset
+version=1.05
+release=1
+source="https://download1590.mediafire.com/ppweu6ls8qjgdcYVjQIlDp6Sn7VeMWlp-5asuoy0bgIG45Rx7EL8c3WpiVMBr6ytCli_NSYp5gayqMFk4H1ANkCNYiT7sINjX8PHKxb_s4a_BucFp7TRiNvUFIpiZAn-FT-m1GuRq1aHhznsVmTdDCR1Oe5--I_dHA-rVyZcqySx_rIg/k1egasvrb17jn3e/AshesHardReset_105.pk3
+	ashes-hard-reset.desktop
+	ashes-hard-reset.sh
+	ashes-hard-reset.png"
+
+build() {
+	mkdir -p $PKG/usr/share/games/$name
+	mkdir -p $PKG/usr/share/applications
+	mkdir -p $PKG/usr/share/pixmaps
+	mkdir -p $PKG/usr/bin
+
+	mv *.pk3 $PKG/usr/share/games/$name/
+
+	install -m 0755 $SRC/$name.sh       $PKG/usr/bin/$name
+	install -m 0644 $SRC/$name.desktop  $PKG/usr/share/applications/
+	install -m 0644 $SRC/$name.png      $PKG/usr/share/pixmaps/
+}
