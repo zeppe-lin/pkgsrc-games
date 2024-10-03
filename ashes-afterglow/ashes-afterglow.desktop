@@ -1,8 +1,8 @@
 [Desktop Entry]
-Name=Ashes: 2063 (Episode 2: Afterglow)
+Name=Ashes: Afterglow (Episode 2)
 Comment=Post-Apocalyptic DOOM2-Mod
-Exec=ashes-2063-2
-Icon=ashes-2063-2
+Exec=ashes-afterglow
+Icon=ashes-afterglow
 Terminal=false
 Type=Application
 Categories=Game;ActionGame;

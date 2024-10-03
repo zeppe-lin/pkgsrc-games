@@ -1,11 +1,11 @@
 drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/bin/
--rwxr-xr-x	root/root	usr/bin/ashes-2063-2
+-rwxr-xr-x	root/root	usr/bin/ashes-afterglow
 drwxr-xr-x	root/root	usr/share/
 drwxr-xr-x	root/root	usr/share/applications/
--rw-r--r--	root/root	usr/share/applications/ashes-2063-2.desktop
+-rw-r--r--	root/root	usr/share/applications/ashes-afterglow.desktop
 drwxr-xr-x	root/root	usr/share/games/
-drwxr-xr-x	root/root	usr/share/games/ashes-2063-2/
--rw-r--r--	root/root	usr/share/games/ashes-2063-2/AshesAfterglow1_15.pk3
+drwxr-xr-x	root/root	usr/share/games/ashes-afterglow/
+-rw-r--r--	root/root	usr/share/games/ashes-afterglow/AshesAfterglow1_15.pk3
 drwxr-xr-x	root/root	usr/share/pixmaps/
--rw-r--r--	root/root	usr/share/pixmaps/ashes-2063-2.png
+-rw-r--r--	root/root	usr/share/pixmaps/ashes-afterglow.png

@@ -1,14 +1,14 @@
-# Description: Ashes: 2063 (Episode 2: Afterglow)
+# Description: Ashes: Afterglow (Episode 2)
 # URL:         https://www.moddb.com/mods/ashes-2063
 # Depends on:  freedoom
 
-name=ashes-2063-2
+name=ashes-afterglow
 version=1.15
 release=1
 source="https://download1326.mediafire.com/v80ufusixeogvP6lgTueVg5ce6MWSzHx822fSKZRO_y5FQhVQrRyt2WgjLCIhXirS0iuWUsIjoDv16w5oNG6JxAXxtnUxTWalNj6-40L3T2vUUMZCmBYPmh-vsO7iHrXlxkdUOidSoRboNTgaDE7cm_O1fcIKMVxNpEG_V1746tjOKEk/8gbadswjokjgr19/AshesAfterglow1_15.pk3
-	ashes-2063-2.desktop
-	ashes-2063-2.sh
-	ashes-2063-2.png"
+	ashes-afterglow.desktop
+	ashes-afterglow.sh
+	ashes-afterglow.png"
 
 build() {
 	mkdir -p $PKG/usr/share/games/$name
