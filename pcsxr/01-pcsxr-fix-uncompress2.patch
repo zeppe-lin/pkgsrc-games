@@ -1,3 +1,4 @@
+Rename uncompress2 to avoid conflict with zlib.
 diff -up a/pcsxr/libpcsxcore/cdriso.c.orig pcsxr/libpcsxcore/cdriso.c
 --- a/pcsxr/libpcsxcore/cdriso.c.orig	2019-06-30 19:54:58.013320015 -0500
 +++ a/pcsxr/libpcsxcore/cdriso.c	2019-06-30 19:56:05.351320015 -0500

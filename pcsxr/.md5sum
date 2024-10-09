@@ -1,4 +1,4 @@
-09161be6bf8786f5d977b61f20d6926c  01-pcsxr-fix-uncompress2.patch
+898a6597f2697710854a4e6359994bc7  01-pcsxr-fix-uncompress2.patch
 96a82dcc66851160f452160a538cd6f8  02-pcsxr-fix-undefined-operations.patch
 c3ed7fc2a5e395a11f860c305522cb7b  03-pcsxr-remove-assertion-64bit.patch
 7e8f618b626909271e18943e9c5478a6  04-add_missing_gte_shift_declaration_in_gte_h.patch

@@ -4,7 +4,7 @@
 
 name=pcsxr
 version=1.9.95
-release=2
+release=3
 source="https://github.com/frealgagu/PCSX-Reloaded/archive/$version/PCSX-Reloaded-$version.tar.gz
 	01-pcsxr-fix-uncompress2.patch
 	02-pcsxr-fix-undefined-operations.patch
@@ -14,6 +14,9 @@ source="https://github.com/frealgagu/PCSX-Reloaded/archive/$version/PCSX-Reloade
 	pcsxr.desktop"
 
 build() {
+	CFLAGS="$CFLAGS -Wno-implicit-function-declaration -Wno-int-conversion -fcommon -I/usr/include/harfbuzz"
+	CXXFLAGS="$CXXFLAGS -Wno-implicit-function-declaration -Wno-int-conversion -fcommon -I/usr/include/harfbuzz"
+
 	cd PCSX-Reloaded-$version
 
 	patch -p1 -i $SRC/01-pcsxr-fix-uncompress2.patch
@@ -36,7 +39,6 @@ build() {
 
 	# --enable-sound supported audio backends:
 	# alsa, null, oss, pulseaudio, sdl, openal
-	CFLAGS="-fcommon -I/usr/include/harfbuzz"  \
 	./configure                                \
 		--prefix=/usr                      \
 		--mandir=/usr/share/man            \
