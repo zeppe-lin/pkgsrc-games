@@ -3,15 +3,18 @@
 
 name=libcddb
 version=1.3.2
-release=1
+release=2
 source=http://download.sourceforge.net/$name/$name-$version.tar.bz2
 
 build() {
+	# fix build with gcc 14
+	CFLAGS="$CFLAGS -Wno-incompatible-pointer-types"
+
 	mkdir build; cd build
 
 	# --without-cdio:
-	#	do not use libcdio functionality when building the
-	#	example program, this also prevents circular dependencies
+	# do not use libcdio functionality when building the example program,
+	# this also prevents circular dependencies
 	../$name-$version/configure  \
 		--prefix=/usr        \
 		--without-cdio       \
