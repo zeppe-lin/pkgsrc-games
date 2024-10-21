@@ -3,14 +3,14 @@
 # Depends on:  gtk3 libsdl2 libvpx libwebp openal zmusic
 
 name=gzdoom
-version=4.12.2-85ae8f8
+version=4.13.1-34dc204
 release=1
 source="https://github.com/ZDoom/$name/archive/${version#*-}/$name-$version.tar.gz
 	fix-file-paths.patch
 	gzdoom.desktop"
 
 build() {
-	patch -d $name-${version#*-}* -p1 -i $SRC/fix-file-paths.patch
+	patch -d $name-${version#*-}* -Np1 -i $SRC/fix-file-paths.patch
 
 	CXXFLAGS="$CXXFLAGS -ffile-prefix-map=\"$PWD\"=."
 	CXXFLAGS="$CXXFLAGS -DSHARE_DIR=\\\"/usr/share/gzdoom\\\""
