@@ -1,22 +1,33 @@
-# Description: SDL version 2, Simple DirectMedia Layer
+# Description: SDL - Simple DirectMedia Layer, version 2
 # URL:         https://www.libsdl.org/
 # Depends on:  mesa
 # Optional:    alsa-lib ibus jack pipewire pulseaudio wayland-protocols
 
 name=libsdl2
-version=2.30.8
+version=2.30.9
 release=1
 source=https://www.libsdl.org/release/SDL2-$version.tar.gz
 
 build() {
-	pkgman isinst alsa-lib          && PKGMK_SDL2="$PKGMK_SDL2 -D SDL_ALSA_SHARED=ON"
-	pkgman isinst ibus              && PKGMK_SDL2="$PKGMK_SDL2 -D SDL_USE_IME=ON"
-	pkgman isinst jack              && PKGMK_SDL2="$PKGMK_SDL2 -D SDL_JACK_SHARED=ON"
-	pkgman isinst pipewire          && PKGMK_SDL2="$PKGMK_SDL2 -D SDL_PIPEWIRE_SHARED=ON"
-	pkgman isinst pulseaudio        && PKGMK_SDL2="$PKGMK_SDL2 -D SDL_PULSEAUDIO_SHARED=ON"
-	pkgman isinst wayland-protocols && PKGMK_SDL2="$PKGMK_SDL2 -D SDL_WAYLAND_SHARED=ON"
+	pkgman isinst alsa-lib &&
+	PKGMK_LIBSDL2="$PKGMK_LIBSDL2 -D SDL_ALSA_SHARED=ON"
 
-	[ -z $CCACHE_PREFIX ] || unset CCACHE_PREFIX
+	pkgman isinst ibus &&
+	PKGMK_LIBSDL2="$PKGMK_LIBSDL2 -D SDL_USE_IME=ON"
+
+	pkgman isinst jack &&
+	PKGMK_LIBSDL2="$PKGMK_LIBSDL2 -D SDL_JACK_SHARED=ON"
+
+	pkgman isinst pipewire &&
+	PKGMK_LIBSDL2="$PKGMK_LIBSDL2 -D SDL_PIPEWIRE_SHARED=ON"
+
+	pkgman isinst pulseaudio &&
+	PKGMK_LIBSDL2="$PKGMK_LIBSDL2 -D SDL_PULSEAUDIO_SHARED=ON"
+
+	pkgman isinst wayland-protocols &&
+	PKGMK_LIBSDL2="$PKGMK_LIBSDL2 -D SDL_WAYLAND_SHARED=ON"
+
+	unset CCACHE_PREFIX
 
 	cmake -S SDL2-$version -B build -G Ninja        \
 		-D CMAKE_INSTALL_PREFIX=/usr            \
@@ -26,7 +37,7 @@ build() {
 		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS"      \
 		-D SDL_CLOCK_GETTIME=ON                 \
 		-D SDL_RPATH=OFF                        \
-		$PKGMK_SDL2
+		$PKGMK_LIBSDL2
 
 	ninja -C build -j ${JOBS:-1} -v
 	DESTDIR=$PKG ninja -C build install
