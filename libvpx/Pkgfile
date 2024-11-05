@@ -3,15 +3,18 @@
 # Depends on:  yasm
 
 name=libvpx
-version=1.14.1
+version=1.15.0
 release=1
-source=https://github.com/webmproject/$name/archive/v$version/$name-v$version.tar.gz
+source="https://github.com/webmproject/$name/archive/v$version/$name-v$version.tar.gz
+	link-with-cflags.patch"
 
 build() {
+	patch -d $name-$version -Np1 -i $SRC/link-with-cflags.patch
+
 	mkdir build; cd build
 
-	CFLAGS="$CFLAGS -ffat-lto-objects"
-	CXXFLAGS="$CXXFLAGS -ffat-lto-objects"
+	export CFLAGS="$CFLAGS -ffat-lto-objects"
+	export CXXFLAGS="$CXXFLAGS -ffat-lto-objects"
 
 	../$name-$version/configure              \
 		--prefix=/usr                    \
