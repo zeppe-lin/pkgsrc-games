@@ -3,7 +3,7 @@
 # Depends on:  gtk3 libsdl2 libvpx libwebp openal zmusic
 
 name=gzdoom
-version=4.13.1-34dc204
+version=4.13.2-72ed0c4
 release=1
 source="https://github.com/ZDoom/$name/archive/${version#*-}/$name-$version.tar.gz
 	fix-file-paths.patch
@@ -31,7 +31,7 @@ build() {
 	ninja -C build -j ${JOBS:-1} -v
 	DESTDIR=$PKG ninja -C build install
 
-	install -m 0644 -Dt $PKG/usr/share/applications/ $SRC/gzdoom.desktop
+	install -m 0644 -Dt $PKG/usr/share/applications $SRC/gzdoom.desktop
 	install -m 0644 -D $SRC/$name-*/src/posix/zdoom.xpm \
 		$PKG/usr/share/icons/hicolor/256x256/apps/gzdoom.xpm
 
