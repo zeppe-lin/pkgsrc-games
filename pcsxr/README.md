@@ -8,13 +8,16 @@ REQUIREMENTS
 
 Build time
 ----------
-* libarchive:  Enable compressed data-tracks support.
-* libcdio:     Enable CD-ROM support.
-* libcdda:     Enable compressed CDDA support.
+* `libarchive`:  Enable compressed data-tracks support.
+* `libcdio`:     Enable CD-ROM support.
+* `libcdda`:     Enable compressed CDDA support.
 
 
-Troubleshooting: MEMADDR_OP: Assertion '!isreg || reg != X86_TEMP' failed
-=========================================================================
+TROUBLESHOOTING
+===============
+
+MEMADDR_OP: Assertion '!isreg || reg != X86_TEMP' failed
+--------------------------------------------------------
 
 If you get the error
 
