@@ -6,7 +6,9 @@ README snes9x
 ONLINE DOCUMENTATION
 ====================
 
-Wiki: https://github.com/snes9xgit/snes9x/wiki
+* [Wiki][1]
+
+[1]: https://github.com/snes9xgit/snes9x/wiki
 
 
 ---
