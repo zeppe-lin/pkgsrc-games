@@ -1,8 +1,8 @@
 OVERVIEW
 ========
 
-This directory contains **games** pkgsrc collection: build scripts and
-files for the games and emulator packages.
+This repository contains **games** pkgsrc collection: build scripts
+and files for the games and emulator packages.
 
 Packages in this collection must depend **only** on the **desktop**,
 **xorg**, **system** and **core** pkgsrc collections.
