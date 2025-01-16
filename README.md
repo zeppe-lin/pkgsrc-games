@@ -11,7 +11,7 @@ Packages in this collection must depend **only** on the **desktop**,
 LICENSE
 =======
 
-pkgsrc-stuff is licensed through the GNU General Public License v3 or
+pkgsrc-games is licensed through the GNU General Public License v3 or
 later <http://gnu.org/licenses/gpl.html>.
 Read the COPYING file for copying conditions.
 Read the COPYRIGHT file for copyright notices.
