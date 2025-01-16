@@ -7,6 +7,9 @@ and files for the games and emulator packages.
 Packages in this collection must depend **only** on the **desktop**,
 **xorg**, **system** and **core** pkgsrc collections.
 
+See repository branches for per-release updates.
+By default the `master` branch is empty.
+
 
 LICENSE
 =======
