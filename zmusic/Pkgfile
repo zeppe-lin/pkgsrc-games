@@ -4,7 +4,7 @@
 # Optional:    soundfont-fluid
 
 name=zmusic
-version=1.1.14-628cd49
+version=1.1.14-f6facda
 release=1
 source="https://github.com/ZDoom/ZMusic/archive/${version#*-}/$name-$version.tar.gz
 	fix-soundfont-path.patch"
