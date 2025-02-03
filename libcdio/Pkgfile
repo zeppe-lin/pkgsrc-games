@@ -3,9 +3,10 @@
 # Depends on:  libcddb ncurses
 
 name=libcdio
-version=2.1.0
+version=2.2.0
 release=1
-source=https://ftp.gnu.org/gnu/$name/$name-$version.tar.bz2
+#source=https://ftp.gnu.org/gnu/$name/$name-$version.tar.bz2
+source=https://github.com/$name/$name/releases/download/$version/$name-$version.tar.bz2
 
 build() {
 	mkdir build; cd build
@@ -16,13 +17,11 @@ build() {
 		--disable-vcd-info   \
 		--enable-cpp-progs   \
 
+	# fix overlinking
 	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
 
 	make V=1
 	make DESTDIR=$PKG install
-
-	sed -i "/LIBCDIO_SOURCE_PATH/s|.*|/* #undef LIBCDIO_SOURCE_PATH */|" \
-		$PKG/usr/include/cdio/cdio_config.h
 
 	# remove junk
 	rm -r $PKG/usr/share/info
