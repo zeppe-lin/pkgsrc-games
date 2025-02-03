@@ -6,9 +6,12 @@
 name=openal
 version=1.24.2
 release=1
-source=https://github.com/kcat/openal-soft/archive/$version/openal-soft-$version.tar.gz
+source="https://github.com/kcat/openal-soft/archive/$version/openal-soft-$version.tar.gz
+	7535824c1cd062495bc026e625c4fd61b787658c.patch"
 
 build() {
+	patch -d openal-soft-$version -Np1 -i $SRC/7535824c1cd062495bc026e625c4fd61b787658c.patch
+
 	cmake -S openal-soft-$version -B build -G Ninja  \
 		-D CMAKE_INSTALL_PREFIX=/usr             \
 		-D CMAKE_INSTALL_LIBDIR=lib              \

@@ -1,0 +1,204 @@
+From 7535824c1cd062495bc026e625c4fd61b787658c Mon Sep 17 00:00:00 2001
+From: Chris Robinson <chris.kcat@gmail.com>
+Date: Tue, 28 Jan 2025 18:43:47 -0800
+Subject: [PATCH] Add an option to trace EAX property commits
+
+Currently only handles reverb and chorus/flanger effects, but should be
+expanded to source and context properties along with the other effects.
+---
+ al/eax/effect.h       |  2 ++
+ al/effects/chorus.cpp | 12 ++++++++++++
+ al/effects/reverb.cpp | 36 ++++++++++++++++++++++++++++++++++++
+ alc/alc.cpp           | 41 +++++++++++++++++++++++++----------------
+ alsoftrc.sample       |  5 +++++
+ docs/env-vars.txt     |  4 ++++
+ 6 files changed, 84 insertions(+), 16 deletions(-)
+
+diff --git a/al/eax/effect.h b/al/eax/effect.h
+index ac32d07190..eead5b8137 100644
+--- a/al/eax/effect.h
++++ b/al/eax/effect.h
+@@ -10,6 +10,8 @@
+ #include "core/effects/base.h"
+ #include "call.h"
+ 
++inline bool EaxTraceCommits{false};
++
+ struct EaxEffectErrorMessages {
+     static constexpr auto unknown_property_id() noexcept { return "Unknown property id."; }
+     static constexpr auto unknown_version() noexcept { return "Unknown version."; }
+diff --git a/al/effects/chorus.cpp b/al/effects/chorus.cpp
+index c10b9d434b..bb9600bf0e 100644
+--- a/al/effects/chorus.cpp
++++ b/al/effects/chorus.cpp
+@@ -9,6 +9,7 @@
+ 
+ #include "alc/context.h"
+ #include "alnumeric.h"
++#include "core/logging.h"
+ #include "effects.h"
+ 
+ #if ALSOFT_EAX
+@@ -563,6 +564,17 @@ struct ChorusFlangerEffect {
+         al_props_.Depth = props.flDepth;
+         al_props_.Feedback = props.flFeedback;
+         al_props_.Delay = props.flDelay;
++        if(EaxTraceCommits) UNLIKELY
++        {
++            TRACE("Chorus/flanger commit:\n"
++                "  Waveform: {}\n"
++                "  Phase: {}\n"
++                "  Rate: {:f}\n"
++                "  Depth: {:f}\n"
++                "  Feedback: {:f}\n"
++                "  Delay: {:f}", al::to_underlying(al_props_.Waveform), al_props_.Phase,
++                al_props_.Rate, al_props_.Depth, al_props_.Feedback, al_props_.Delay);
++        }
+ 
+         return true;
+     }
+diff --git a/al/effects/reverb.cpp b/al/effects/reverb.cpp
+index c51858f292..d3b83a089e 100644
+--- a/al/effects/reverb.cpp
++++ b/al/effects/reverb.cpp
+@@ -12,10 +12,14 @@
+ #include "alc/context.h"
+ #include "alnumeric.h"
+ #include "alspan.h"
++#include "core/logging.h"
+ #include "effects.h"
++#include "fmt/ranges.h"
++#include "opthelpers.h"
+ 
+ #if ALSOFT_EAX
+ #include <cassert>
++
+ #include "al/eax/api.h"
+ #include "al/eax/call.h"
+ #include "al/eax/effect.h"
+@@ -1053,6 +1057,38 @@ bool EaxReverbCommitter::commit(const EAXREVERBPROPERTIES &props)
+         ret.LFReference = props.flLFReference;
+         ret.RoomRolloffFactor = props.flRoomRolloffFactor;
+         ret.DecayHFLimit = ((props.ulFlags & EAXREVERBFLAGS_DECAYHFLIMIT) != 0);
++        if(EaxTraceCommits) UNLIKELY
++        {
++            TRACE("Reverb commit:\n"
++                "  Density: {:f}\n"
++                "  Diffusion: {:f}\n"
++                "  Gain: {:f}\n"
++                "  GainHF: {:f}\n"
++                "  GainLF: {:f}\n"
++                "  DecayTime: {:f}\n"
++                "  DecayHFRatio: {:f}\n"
++                "  DecayLFRatio: {:f}\n"
++                "  ReflectionsGain: {:f}\n"
++                "  ReflectionsDelay: {:f}\n"
++                "  ReflectionsPan: {}\n"
++                "  LateReverbGain: {:f}\n"
++                "  LateReverbDelay: {:f}\n"
++                "  LateRevernPan: {}\n"
++                "  EchoTime: {:f}\n"
++                "  EchoDepth: {:f}\n"
++                "  ModulationTime: {:f}\n"
++                "  ModulationDepth: {:f}\n"
++                "  AirAbsorptionGainHF: {:f}\n"
++                "  HFReference: {:f}\n"
++                "  LFReference: {:f}\n"
++                "  RoomRolloffFactor: {:f}\n"
++                "  DecayHFLimit: {}", ret.Density, ret.Diffusion, ret.Gain, ret.GainHF, ret.GainLF,
++                ret.DecayTime, ret.DecayHFRatio, ret.DecayLFRatio, ret.ReflectionsGain,
++                ret.ReflectionsDelay, ret.ReflectionsPan, ret.LateReverbGain, ret.LateReverbDelay,
++                ret.LateReverbPan, ret.EchoTime, ret.EchoDepth, ret.ModulationTime,
++                ret.ModulationDepth, ret.AirAbsorptionGainHF, ret.HFReference, ret.LFReference,
++                ret.RoomRolloffFactor, ret.DecayHFLimit ? "true" : "false");
++        }
+         return ret;
+     }();
+ 
+diff --git a/alc/alc.cpp b/alc/alc.cpp
+index d378364bed..afad6c46ac 100644
+--- a/alc/alc.cpp
++++ b/alc/alc.cpp
+@@ -719,26 +719,35 @@ void alc_initconfig()
+     if(defrevopt) LoadReverbPreset(*defrevopt, &ALCcontext::sDefaultEffect);
+ 
+ #if ALSOFT_EAX
++    if(const auto eax_enable_opt = ConfigValueBool({}, "eax", "enable"))
+     {
+-        if(const auto eax_enable_opt = ConfigValueBool({}, "eax", "enable"))
+-        {
+-            eax_g_is_enabled = *eax_enable_opt;
+-            if(!eax_g_is_enabled)
+-                TRACE("EAX disabled by a configuration.");
+-        }
+-        else
+-            eax_g_is_enabled = true;
++        eax_g_is_enabled = *eax_enable_opt;
++        if(!eax_g_is_enabled)
++            TRACE("EAX disabled by a configuration.");
++    }
++    else
++        eax_g_is_enabled = true;
+ 
+-        if((DisabledEffects.test(EAXREVERB_EFFECT) || DisabledEffects.test(CHORUS_EFFECT))
+-            && eax_g_is_enabled)
++    if((DisabledEffects.test(EAXREVERB_EFFECT) || DisabledEffects.test(CHORUS_EFFECT))
++        && eax_g_is_enabled)
++    {
++        eax_g_is_enabled = false;
++        TRACE("EAX disabled because {} disabled.",
++            (DisabledEffects.test(EAXREVERB_EFFECT) && DisabledEffects.test(CHORUS_EFFECT))
++                ? "EAXReverb and Chorus are"sv :
++            DisabledEffects.test(EAXREVERB_EFFECT) ? "EAXReverb is"sv :
++            DisabledEffects.test(CHORUS_EFFECT) ? "Chorus is"sv : ""sv);
++    }
++
++    if(eax_g_is_enabled)
++    {
++        if(auto optval = al::getenv("ALSOFT_EAX_TRACE_COMMITS"))
+         {
+-            eax_g_is_enabled = false;
+-            TRACE("EAX disabled because {} disabled.",
+-                (DisabledEffects.test(EAXREVERB_EFFECT) && DisabledEffects.test(CHORUS_EFFECT))
+-                    ? "EAXReverb and Chorus are"sv :
+-                DisabledEffects.test(EAXREVERB_EFFECT) ? "EAXReverb is"sv :
+-                DisabledEffects.test(CHORUS_EFFECT) ? "Chorus is"sv : ""sv);
++            EaxTraceCommits = al::case_compare(*optval, "true"sv) == 0
++                || strtol(optval->c_str(), nullptr, 0) == 1;
+         }
++        else
++            EaxTraceCommits = GetConfigValueBool({}, "eax"sv, "trace-commits"sv, false);
+     }
+ #endif // ALSOFT_EAX
+ }
+diff --git a/alsoftrc.sample b/alsoftrc.sample
+index 166aae160f..3c3a34fc03 100644
+--- a/alsoftrc.sample
++++ b/alsoftrc.sample
+@@ -652,6 +652,11 @@
+ #  Sets whether to enable EAX extensions or not.
+ #enable = true
+ 
++## trace-commits: (global)
++#  Sets whether log EAX property commits with trace messages. This can
++#  significantly increase the amount of log messages for apps that use EAX.
++#trace-commits = false
++
+ ##
+ ## Per-game compatibility options (these should only be set in per-game config
+ ## files, *NOT* system- or user-level!)
+diff --git a/docs/env-vars.txt b/docs/env-vars.txt
+index c687ad0294..97e5882d40 100644
+--- a/docs/env-vars.txt
++++ b/docs/env-vars.txt
+@@ -50,6 +50,10 @@ easier to track the cause.
+ ALSOFT_TRAP_ERROR
+ Set to "true" or "1" to force trapping both ALC and AL errors.
+ 
++ALSOFT_EAX_TRACE_COMMITS
++Overrides the EAX trace-commits config option. This specifies whether EAX
++property commits are logged with trace messages.
++
+ *** Compatibility ***
+ 
+ __ALSOFT_HALF_ANGLE_CONES
