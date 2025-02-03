@@ -4,7 +4,7 @@
 # Optional:    dbus ffmpeg fluidsynth libsdl2 libsndfile pipewire portaudio pulseaudio qt5
 
 name=openal
-version=1.24.1
+version=1.24.2
 release=1
 source=https://github.com/kcat/openal-soft/archive/$version/openal-soft-$version.tar.gz
 
