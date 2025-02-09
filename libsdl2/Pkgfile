@@ -4,34 +4,34 @@
 # Optional:    alsa-lib ibus jack pipewire pulseaudio wayland-protocols
 
 name=libsdl2
-version=2.30.12
+version=2.32.0
 release=1
 #source=https://www.libsdl.org/release/SDL2-$version.tar.gz
 source=$name-$version.tar.gz::https://github.com/libsdl-org/SDL/archive/refs/tags/release-$version.tar.gz
 
 build() {
 	if pkgman isinst alsa-lib >/dev/null 2>&1; then
-	PKGMK_LIBSDL2="$PKGMK_LIBSDL2 -D SDL_ALSA_SHARED=ON"
+		PKGMK_LIBSDL2="$PKGMK_LIBSDL2 -D SDL_ALSA_SHARED=ON"
 	fi
 
 	if pkgman isinst ibus >/dev/null 2>&1; then
-	PKGMK_LIBSDL2="$PKGMK_LIBSDL2 -D SDL_USE_IME=ON"
+		PKGMK_LIBSDL2="$PKGMK_LIBSDL2 -D SDL_USE_IME=ON"
 	fi
 
 	if pkgman isinst jack >/dev/null 2>&1; then
-	PKGMK_LIBSDL2="$PKGMK_LIBSDL2 -D SDL_JACK_SHARED=ON"
+		PKGMK_LIBSDL2="$PKGMK_LIBSDL2 -D SDL_JACK_SHARED=ON"
 	fi
 
 	if pkgman isinst pipewire >/dev/null 2>&1; then
-	PKGMK_LIBSDL2="$PKGMK_LIBSDL2 -D SDL_PIPEWIRE_SHARED=ON"
+		PKGMK_LIBSDL2="$PKGMK_LIBSDL2 -D SDL_PIPEWIRE_SHARED=ON"
 	fi
 
 	if pkgman isinst pulseaudio >/dev/null 2>&1; then
-	PKGMK_LIBSDL2="$PKGMK_LIBSDL2 -D SDL_PULSEAUDIO_SHARED=ON"
+		PKGMK_LIBSDL2="$PKGMK_LIBSDL2 -D SDL_PULSEAUDIO_SHARED=ON"
 	fi
 
 	if pkgman isinst wayland-protocols >/dev/null 2>&1; then
-	PKGMK_LIBSDL2="$PKGMK_LIBSDL2 -D SDL_WAYLAND_SHARED=ON"
+		PKGMK_LIBSDL2="$PKGMK_LIBSDL2 -D SDL_WAYLAND_SHARED=ON"
 	fi
 
 	unset CCACHE_PREFIX
