@@ -4,13 +4,14 @@
 
 name=pcsxr
 version=1.9.95
-release=3
+release=4
 source="https://github.com/frealgagu/PCSX-Reloaded/archive/$version/PCSX-Reloaded-$version.tar.gz
 	01-pcsxr-fix-uncompress2.patch
 	02-pcsxr-fix-undefined-operations.patch
 	03-pcsxr-remove-assertion-64bit.patch
 	04-add_missing_gte_shift_declaration_in_gte_h.patch
 	05-remove_assert_in_ix86_64.patch
+	pcsxr.1
 	pcsxr.desktop"
 
 build() {
@@ -39,17 +40,17 @@ build() {
 
 	# --enable-sound supported audio backends:
 	# alsa, null, oss, pulseaudio, sdl, openal
-	./configure                                \
-		--prefix=/usr                      \
-		--mandir=/usr/share/man            \
-		--disable-nls                      \
-		--enable-libcdio                   \
-		--enable-opengl                    \
-		--enable-sound=alsa                \
+	./configure                      \
+		--prefix=/usr            \
+		--mandir=/usr/share/man  \
+		--disable-nls            \
+		--enable-libcdio         \
+		--enable-opengl          \
+		--enable-sound=alsa      \
 
 	make V=1
 	make DESTDIR=$PKG install
 
-	install -m 0644 -Dt $PKG/usr/share/applications/ \
-		$SRC/pcsxr.desktop
+	install -m 0644 -Dt $PKG/usr/share/man/man1 $SRC/pcsxr.1
+	install -m 0644 -Dt $PKG/usr/share/applications $SRC/pcsxr.desktop
 }
