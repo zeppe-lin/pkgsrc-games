@@ -1,0 +1,26 @@
+# Description: SDL-based DOS emulator for classic games
+# URL:         http://dosbox.sourceforge.net/
+# Depends on:  libpng libsdl
+
+name=dosbox
+version=0.74-3
+release=1
+source="https://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.gz
+	dosbox.png
+	dosbox.desktop"
+
+build() {
+	mkdir build; cd build
+
+	../$name-$version/configure           \
+		--prefix=/usr                 \
+		--sysconfdir=/usr/etc/dosbox  \
+		--disable-sdltest             \
+		--disable-alsatest            \
+
+	make V=1
+	make DESTDIR=$PKG install
+
+	install -m 0644 -Dt $PKG/usr/share/pixmaps $SRC/dosbox.png
+	install -m 0644 -Dt $PKG/usr/share/applications $SRC/dosbox.desktop
+}

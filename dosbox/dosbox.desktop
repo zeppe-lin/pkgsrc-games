@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=DOSBox Emulator
+Comment=Run old DOS applications
+Icon=dosbox
+Exec=dosbox
+Terminal=false
+Categories=Game;Emulator;
+Keywords=DOS Emulator;
