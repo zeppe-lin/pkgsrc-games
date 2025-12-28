@@ -3,7 +3,7 @@
 # Depends on:  libcddb ncurses
 
 name=libcdio
-version=2.2.0
+version=2.3.0
 release=1
 #source=https://ftp.gnu.org/gnu/$name/$name-$version.tar.bz2
 source=https://github.com/$name/$name/releases/download/$version/$name-$version.tar.bz2
@@ -11,18 +11,18 @@ source=https://github.com/$name/$name/releases/download/$version/$name-$version.
 build() {
 	mkdir build; cd build
 
-	autoreconf -fi ../$name-$version
-	../$name-$version/configure  \
-		--prefix=/usr        \
-		--disable-vcd-info   \
-		--enable-cpp-progs   \
+	autoreconf -fiv ../$name-$version
+	../$name-$version/configure \
+		--prefix=/usr \
+		--disable-vcd-info \
+		--enable-cpp-progs \
 
-	# fix overlinking
-	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+	# Ensure --as-needed is applied to shared linker invocations
+	sed -i 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
 
 	make V=1
 	make DESTDIR=$PKG install
 
-	# remove junk
+	# Remove junk
 	rm -r $PKG/usr/share/info
 }
