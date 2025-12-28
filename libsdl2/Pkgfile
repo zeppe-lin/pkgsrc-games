@@ -1,10 +1,12 @@
 # Description: SDL - Simple DirectMedia Layer, version 2
 # URL:         https://www.libsdl.org/
 # Depends on:  mesa
-# Optional:    alsa-lib ibus jack pipewire pulseaudio wayland-protocols
+
+# Maintainer notes on dependencies:
+#   alsa-lib ibus jack pipewire pulseaudio wayland-protocols: optional
 
 name=libsdl2
-version=2.32.8
+version=2.32.10
 release=1
 source=$name-$version.tar.gz::https://github.com/libsdl-org/SDL/archive/refs/tags/release-$version.tar.gz
 
@@ -35,20 +37,20 @@ build() {
 
 	unset CCACHE_PREFIX
 
-	cmake -S SDL-release-$version -B build -G Ninja  \
-		-D CMAKE_INSTALL_PREFIX=/usr             \
-		-D CMAKE_INSTALL_LIBDIR=lib              \
-		-D CMAKE_BUILD_TYPE=Release              \
-		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS"   \
-		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS"       \
-		-D SDL_CLOCK_GETTIME=ON                  \
-		-D SDL_RPATH=OFF                         \
-		$PKGMK_LIBSDL2                           \
-		-Wno-dev                                 \
+	cmake -S SDL-release-$version -B build -G Ninja \
+		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D CMAKE_INSTALL_LIBDIR=lib \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+		-D SDL_CLOCK_GETTIME=ON \
+		-D SDL_RPATH=OFF \
+		$PKGMK_LIBSDL2 \
+		-Wno-dev \
 
 	ninja -C build -j ${JOBS:-1} -v
 	DESTDIR=$PKG ninja -C build install
 
-	# remove junk
+	# Remove junk
 	rm -r $PKG/usr/share/licenses
 }
