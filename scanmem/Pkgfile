@@ -10,19 +10,19 @@ source="https://github.com/$name/$name/archive/v$version/$name-$version.tar.gz
 	man.patch"
 
 build() {
-	patch -d $name-$version -p1 -i $SRC/0def8b2abfcb922c9b647092394f079d29e299e1.patch
-	patch -d $name-$version -p0 -i $SRC/man.patch
+	patch -d $name-$version -Np1 -i $SRC/0def8b2abfcb922c9b647092394f079d29e299e1.patch
+	patch -d $name-$version -Np0 -i $SRC/man.patch
 
 	mkdir build; cd build
 
-	autoreconf -fi ../$name-$version
-	../$name-$version/configure  \
-		--prefix=/usr        \
-		--disable-nls        \
+	autoreconf -fiv ../$name-$version
+	../$name-$version/configure \
+		--prefix=/usr \
+		--disable-nls \
 
 	make V=1
 	make DESTDIR=$PKG install
 
-	# remove junk
+	# Remove junk
 	rm -r $PKG/usr/share/doc
 }
