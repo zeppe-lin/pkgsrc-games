@@ -1,28 +1,28 @@
 # Description: Cross-platform 3D audio
 # URL:         https://github.com/kcat/openal-soft
 # Depends on:  alsa-lib
-# Optional:    dbus ffmpeg fluidsynth libsdl2 libsndfile pipewire portaudio pulseaudio qt5
+
+# Maintainer notes on dependencies:
+#   dbus ffmpeg fluidsynth libsdl2 libsndfile pipewire portaudio
+#     pulseaudio qt5: optional
 
 name=openal
-version=1.24.3
+version=1.25.0
 release=1
-source="https://github.com/kcat/openal-soft/archive/$version/openal-soft-$version.tar.gz
-	https://github.com/kcat/openal-soft/compare/dc7d7054a5b4f3bec1dc23a42fd616a0847af948...481c9e0b461a2256212c5c40153509f935268c8d.patch"
+source=https://github.com/kcat/openal-soft/archive/$version/openal-soft-$version.tar.gz
 
 build() {
-	patch -d openal-soft-$version -Np1 -i $SRC/*.patch
-
-	cmake -S openal-soft-$version -B build -G Ninja  \
-		-D CMAKE_INSTALL_PREFIX=/usr             \
-		-D CMAKE_INSTALL_LIBDIR=lib              \
-		-D CMAKE_BUILD_TYPE=Release              \
-		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS"   \
-		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS"       \
-		-D ALSOFT_UTILS=ON                       \
-		-D ALSOFT_INSTALL_CONFIG=ON              \
-		-D ALSOFT_INSTALL_HRTF_DATA=ON           \
-		-D ALSOFT_INSTALL_UTILS=ON               \
-		-D ALSOFT_EXAMPLES=OFF                   \
+	cmake -S openal-soft-$version -B build -G Ninja \
+		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D CMAKE_INSTALL_LIBDIR=lib \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+		-D ALSOFT_UTILS=ON \
+		-D ALSOFT_INSTALL_CONFIG=ON \
+		-D ALSOFT_INSTALL_HRTF_DATA=ON \
+		-D ALSOFT_INSTALL_UTILS=ON \
+		-D ALSOFT_EXAMPLES=OFF \
 
 	ninja -C build -j ${JOBS:-1} -v
 	DESTDIR=$PKG ninja -C build install
