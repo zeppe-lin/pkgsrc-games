@@ -1,0 +1,32 @@
+# Description: C++ library for the Debug Adapter Protocol
+# URL:         https://github.com/google/cppdap
+# Depends on:  nlohmann-json
+
+name=libcppdap
+version=1.58.0-6464cd7
+release=1
+source=https://github.com/google/cppdap/archive/${version#*-}/$name-$version.tar.gz
+
+build() {
+	sed -e "/project.*VERSION/s/VERSION [0-9.]* /VERSION ${version%-*} /" \
+	    -i cppdap-${version#*-}*/CMakeLists.txt
+	#   -e "/add_library/s/ STATIC / /" \
+
+	_cmake_args="
+	-D CMAKE_INSTALL_PREFIX=/usr \
+	-D CMAKE_INSTALL_LIBDIR=lib \
+	-D CPPDAP_BUILD_TESTS=OFF \
+	-D CPPDAP_BUILD_EXAMPLES=OFF \
+	-D CPPDAP_INSTALL_VSCODE_EXAMPLES=OFF \
+	-D CPPDAP_USE_EXTERNAL_NLOHMANN_JSON_PACKAGE=ON"
+
+	cmake -S cppdap-${version#*-}* -B build -G Ninja $_cmake_args \
+		-D BUILD_SHARED_LIBS=ON
+	cmake -S cppdap-${version#*-}* -B build-static -G Ninja $_cmake_args
+
+	ninja -C build -j ${JOBS:-1} -v
+	DESTDIR=$PKG ninja -C build install
+
+	ninja -C build-static -j ${JOBS:-1} -v
+	DESTDIR=$PKG ninja -C build-static install
+}
