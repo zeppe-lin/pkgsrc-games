@@ -6,8 +6,7 @@ name=gzdoom
 version=4.14.2-092b9c0
 release=1
 source="https://github.com/ZDoom/$name/archive/${version#*-}/$name-$version.tar.gz
-	fix-file-paths.patch
-	gzdoom.desktop"
+	fix-file-paths.patch"
 
 build() {
 	patch -d $name-${version#*-}* -Np1 -i $SRC/fix-file-paths.patch
