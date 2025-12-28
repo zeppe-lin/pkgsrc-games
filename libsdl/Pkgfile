@@ -10,17 +10,17 @@ source="https://www.libsdl.org/release/SDL-$version.tar.gz
 	libsdl-1.2.15-bs.patch"
 
 build() {
-	patch -d SDL-$version -p1 -i $SRC/libsdl-1.2.x-libx11.patch
-	patch -d SDL-$version -p1 -i $SRC/libsdl-1.2.15-bs.patch
+	patch -d SDL-$version -Np1 -i $SRC/libsdl-1.2.x-libx11.patch
+	patch -d SDL-$version -Np1 -i $SRC/libsdl-1.2.15-bs.patch
 
 	mkdir build; cd build
 
-	../SDL-$version/configure   \
-		--prefix=/usr       \
-		--enable-alsa       \
-		--disable-rpath     \
-		--disable-alsatest  \
-		--disable-esd-test  \
+	../SDL-$version/configure \
+		--prefix=/usr \
+		--enable-alsa \
+		--disable-rpath \
+		--disable-alsatest \
+		--disable-esd-test \
 
 	make V=1
 	make DESTDIR=$PKG install
