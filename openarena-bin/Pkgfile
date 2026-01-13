@@ -1,12 +1,14 @@
 # Description: Violent, sexy, multiplayer FPS based on the Quake 3 Engine
 # URL:         http://openarena.ws/
-# Depends on:  curl glibc-32 libsdl libvorbis
-# Optional:    openal
+# Depends on:  curl glibc-32 libsdl libvorbis openal
+
+# Maintainer notes on dependencies:
+#   openal: enhanced sound (optional, enabled by default)
 
 name=openarena-bin
 version=0.8.8
 release=3
-source="http://download.tuxfamily.org/openarena/rel/$(echo $version | tr -d .)/openarena-$version.zip
+source="https://downloads.sourceforge.net/project/oarena/openarena-$version.zip
 	openarena-launcher.sh
 	openarena.png
 	openarena-server.png
@@ -14,7 +16,7 @@ source="http://download.tuxfamily.org/openarena/rel/$(echo $version | tr -d .)/o
 	openarena-server.desktop"
 
 build() {
-	# remove junk
+	# Remove junk
 	cd openarena-$version
 	rm *.dll *.exe *.i386
 	rm -rf __MACOSX *.app
@@ -28,16 +30,16 @@ build() {
 	find $PKG/opt/openarena -type d -exec chmod 0755 {} \;
 	chmod 0755 $PKG/opt/openarena/*.x86_64
 
-	# prevent fullscreen on start, let the user configure the resolution
+	# Prevent fullscreen on start, let the user configure the resolution
 	cat > $PKG/opt/openarena/baseoa/q3config.cfg <<EOF
 seta r_fullscreen "0"
 EOF
 
-	# pixmaps
+	# Pixmaps
 	install -m 0644 -Dt $PKG/usr/share/pixmaps/ \
 		$SRC/openarena.png     $SRC/openarena-server.png
 
-	# launcher
+	# Launcher
 	cp $SRC/openarena-launcher.sh $PKG/opt/openarena/
 	chmod 0755 $PKG/opt/openarena/openarena-launcher.sh
 
