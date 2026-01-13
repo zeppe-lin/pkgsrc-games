@@ -1,7 +1,9 @@
 # Description: GZDoom's music system as a standalone library
 # URL:         https://github.com/ZDoom/ZMusic
 # Depends on:  alsa-lib libsndfile mpg123 zlib
-# Optional:    soundfont-fluid
+
+# Maintainer notes on dependencies:
+#   soundfont-fluid: enabled if installed, otherwise uses the bundled version
 
 name=zmusic
 version=1.3.0
