@@ -21,9 +21,8 @@ TROUBLESHOOTING
 
 This error occurs with the x86 dynamic recompiler (dynarec).
 Upstream recommends switching to the **Interpreter Mode** as a stable
-workaround.
-While this may slightly impact performance on very old hardware, it
-resolves the assertion failure.
+workaround.  While this may slightly impact performance on very old
+hardware, it resolves the assertion failure.
 
 **Solution:**
 

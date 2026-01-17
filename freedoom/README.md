@@ -11,16 +11,18 @@ Freedoom: Phase 1
 
 File: `freedoom1.wad`
 
-Four episodes, nine levels each, totalling 36 levels.  This game aims for
-compatibility with The Ultimate Doom mods, also known as plain Doom or Doom 1.
+Four episodes, nine levels each, totalling 36 levels.  This game aims
+for compatibility with The Ultimate Doom mods, also known as plain
+Doom or Doom 1.
 
 Freedoom: Phase 2
 -----------------
 
 File: `freedoom2.wad`
 
-32 levels in one long episode, featuring extra monsters and a double-barrelled
-shotgun.  This game aims for compatibility with Doom II mods.
+32 levels in one long episode, featuring extra monsters and a
+double-barrelled shotgun.  This game aims for compatibility with Doom
+II mods.
 
 FreeDM
 ------
