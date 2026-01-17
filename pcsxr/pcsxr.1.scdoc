@@ -1,0 +1,56 @@
+PCSXR(1)
+
+# NAME
+
+pcsxr - Playstation emulator
+
+# SYNOPSIS
+
+*pcsxr* [_options_] [_file_]
+
+# DESCRIPTION
+
+*pcsxr* is a plugin‐based PlayStation emulator able to play most PSX
+games.
+It provides CPU, BIOS, and basic system emulation and relies on
+plugins for sound, input, and graphics emulation.
+
+The options are as follows:
+
+*-runcd*
+	Runs CD‐ROM from drive.
+
+*-cdfile* _file_
+	Runs a CD image file.
+
+*-nogui*
+	Don't load the GUI.
+
+*-cfg* _file_
+	Specify a different config file.
+
+*-psxout*
+	Enable PSX output.
+
+*-slowboot*
+	Enable BIOS Logo.
+
+*-load* _statenum_
+	Loads savestate _statenum_.
+
+*-help*, *-h*
+	Display help message.
+
+# AUTHORS
+
+PCSX was written by Linuzappz <linuzappz@pcsx.net>.
+
+PCSX‐df was written by Ryan Schultz <schultz.ryan@gmail.com> and
+Andrew Burton <adb@iinet.net.au>.
+
+PCSX‐Reloaded was written by Wei Mingzhi <weimingzhi@gmail.com>.
+
+This manual page was written for Zeppe-Lin by
+Alexandr Savca <alexandr.savca89@gmail.com>.
+
+; vim: ft=scdoc cc=72 tw=70

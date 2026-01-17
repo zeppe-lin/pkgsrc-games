@@ -4,5 +4,5 @@ c3ed7fc2a5e395a11f860c305522cb7b  03-pcsxr-remove-assertion-64bit.patch
 7e8f618b626909271e18943e9c5478a6  04-add_missing_gte_shift_declaration_in_gte_h.patch
 b9a14e6d963e4476ab2249f0fbb22fd5  05-remove_assert_in_ix86_64.patch
 ee0f9dfd003d9a5350aafc8cca0cdeee  PCSX-Reloaded-1.9.95.tar.gz
-7f746e85417fb46ce9945553b68eb927  pcsxr.1
+876236eb74b97318a140020126e97483  pcsxr.1.scdoc
 04f6f61caf5dc113cd6212722b9c7fd1  pcsxr.desktop
