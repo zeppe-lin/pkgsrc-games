@@ -6,7 +6,7 @@
 #   soundfont-fluid: enabled if installed, otherwise uses the bundled version
 
 name=zmusic
-version=1.3.0
+version=1.3.0-131d457
 release=1
 source="https://github.com/ZDoom/ZMusic/archive/${version#*-}/$name-$version.tar.gz
 	fix-soundfont-path.patch"
