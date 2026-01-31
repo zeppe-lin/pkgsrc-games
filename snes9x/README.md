@@ -1,13 +1,11 @@
-README snes9x
+README for snes9x
 
 ---
 
-
-ONLINE DOCUMENTATION
-====================
+REFERENCES
+==========
 
 * Wiki: https://github.com/snes9xgit/snes9x/wiki
-
 
 ---
 

@@ -1,7 +1,6 @@
-README freedoom
+README for freedoom
 
 ---
-
 
 NOTES
 =====
@@ -30,7 +29,6 @@ FreeDM
 File: `freedm.wad`
 
 A 32-level game designed for competitive deathmatch play.
-
 
 ---
 

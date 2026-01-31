@@ -1,13 +1,12 @@
-README openal
+README for openal
 
 ---
-
 
 REQUIREMENTS
 ============
 
-The following additional features may be enabled by installing the listed
-optional dependencies:
+The following additional features may be enabled by installing the
+listed optional dependencies:
 
 * `alsa-lib`:   Enable alsa backend.
 * `dbus`:       Enable RTKit/D-Bus support.
@@ -17,7 +16,6 @@ optional dependencies:
                 Add `-D ALSOFT_BACKEND_SDL2=ON` build option.
 * `portaudio`:  Enable portaudio backend.
 * `pulseaudio`: Enable pulseaudio backend.
-
 
 ---
 

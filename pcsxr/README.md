@@ -1,4 +1,4 @@
-README pcsxr
+README for pcsxr
 
 ---
 
@@ -32,7 +32,6 @@ hardware, it resolves the assertion failure.
    ```
    Config.CPU = 1
    ```
-
 
 ---
 

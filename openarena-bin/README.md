@@ -1,13 +1,11 @@
-README openarena-bin
+README for openarena-bin
 
 ---
-
 
 REQUIREMENTS
 ============
 
 * `openal`:  (optional)  Surround sound.
-
 
 ---
 
