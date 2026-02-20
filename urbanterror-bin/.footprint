@@ -32,12 +32,14 @@ drwxr-xr-x	root/root	opt/urbanterror/q3ut4/
 -rw-r--r--	root/root	opt/urbanterror/q3ut4/zUrT43_qvm.pk3
 -rwxr-xr-x	root/root	opt/urbanterror/urbanterror
 -rwxr-xr-x	root/root	opt/urbanterror/urbanterror-ded
+-rwxr-xr-x	root/root	opt/urbanterror/urbanterror-launcher.sh
 drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/bin/
--rwxr-xr-x	root/root	usr/bin/urbanterror
--rwxr-xr-x	root/root	usr/bin/urbanterror-server
+lrwxrwxrwx	root/root	usr/bin/urbanterror -> /opt/urbanterror/urbanterror-launcher.sh
+lrwxrwxrwx	root/root	usr/bin/urbanterror-server -> /opt/urbanterror/urbanterror-launcher.sh
 drwxr-xr-x	root/root	usr/share/
 drwxr-xr-x	root/root	usr/share/applications/
+-rw-r--r--	root/root	usr/share/applications/urbanterror-server.desktop
 -rw-r--r--	root/root	usr/share/applications/urbanterror.desktop
 drwxr-xr-x	root/root	usr/share/pixmaps/
 -rw-r--r--	root/root	usr/share/pixmaps/urbanterror.png

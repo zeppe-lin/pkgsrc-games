@@ -4,36 +4,46 @@
 
 name=urbanterror-bin
 version=4.3.4
-release=1
-source="http://www.happyurtday.com/releases/4x/UrbanTerror$(echo $version | tr -d .)_full.zip
-	urbanterror.desktop
+release=2
+source="https://mirror2.urbanterror.info/UrbanTerror$(
+	echo $version | tr -d . )_full.zip
 	urbanterror.png
-	urbanterror.sh
-	urbanterror-server.sh"
+	urbanterror.desktop
+	urbanterror-server.desktop
+	urbanterror-launcher.sh"
 
 build() {
-	mkdir -p $PKG/opt/urbanterror
+	cd UrbanTerror43
 
-	cd $PKG/opt/urbanterror
+	install -m 0755 -D Quake3-UrT.x86_64 \
+		$PKG/opt/urbanterror/urbanterror
 
-	install -m 0755 $SRC/UrbanTerror43/Quake3-UrT.x86_64 urbanterror
-	install -m 0755 $SRC/UrbanTerror43/Quake3-UrT-Ded.x86_64 urbanterror-ded
+	install -m 0755 -D Quake3-UrT-Ded.x86_64 \
+		$PKG/opt/urbanterror/urbanterror-ded
 
-	cp -r $SRC/UrbanTerror43/q3ut4 .
+	cp -r q3ut4 $PKG/opt/urbanterror/q3ut4
 
-	cat <<EOF >> $PKG/opt/urbanterror/q3ut4/autoexec.cfg
+	cat << EOF >> $PKG/opt/urbanterror/q3ut4/autoexec.cfg
 
 seta cl_cURLLib "/usr/lib/libcurl.so.4"
 seta r_fullscreen 0
 
 EOF
 
-	# TODO: desktop launcher for urbanterror-server
-	install -m 0644 -D $SRC/urbanterror.desktop \
-		$PKG/usr/share/applications/urbanterror.desktop
-	install -m 0644 -D $SRC/urbanterror.png \
-		$PKG/usr/share/pixmaps/urbanterror.png
+	# freedesktop.org launchers
+	install -m 0644 -Dt $PKG/usr/share/applications \
+		$SRC/*.desktop
 
-	install -m 0755 -D $SRC/urbanterror.sh $PKG/usr/bin/urbanterror
-	install -m 0755 -D $SRC/urbanterror-server.sh $PKG/usr/bin/urbanterror-server
+	# Pixmap
+	install -m 0644 -Dt $PKG/usr/share/pixmaps \
+		$SRC/urbanterror.png
+
+	# Launcher & symlinks
+	install -m 0755 -Dt $PKG/opt/urbanterror \
+		$SRC/urbanterror-launcher.sh
+	mkdir -p $PKG/usr/bin
+	ln -s /opt/urbanterror/urbanterror-launcher.sh \
+		$PKG/usr/bin/urbanterror
+	ln -s /opt/urbanterror/urbanterror-launcher.sh \
+		$PKG/usr/bin/urbanterror-server
 }

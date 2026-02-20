@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Urban Terror Server
+Comment=Run an Urban Terror server
+Exec=urbanterror-server
+Icon=urbanterror
+Type=Application
+Terminal=true
+Categories=Network;Game;
