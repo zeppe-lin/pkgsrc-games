@@ -1,0 +1,25 @@
+# Description: Sony PlayStation 2 emulator
+# URL:         https://pcsx2.net/
+# Depends on:  fuse2
+
+name=pcsx2-appimage
+version=2.6.3
+release=1
+source="https://github.com/PCSX2/pcsx2/releases/download/v$version/pcsx2-v$version-linux-appimage-x64-Qt.AppImage
+	pcsx2.png::https://github.com/PCSX2/pcsx2/raw/refs/heads/master/pcsx2-qt/resources/icons/AppIcon64.png
+	pcsx2.desktop"
+
+build() {
+	mkdir -p $PKG/opt/pcsx2
+
+	mv *.AppImage $PKG/opt/pcsx2/pcsx2-$version.AppImage
+	chmod +x $PKG/opt/pcsx2/pcsx2-$version.AppImage
+
+	mkdir -p $PKG/usr/bin
+	ln -s /opt/pcsx2/pcsx2-$version.AppImage $PKG/usr/bin/pcsx2
+
+	install -m 0644 -Dt $PKG/usr/share/applications \
+		$SRC/pcsx2.desktop
+	install -m 0644 -Dt $PKG/usr/share/pixmaps \
+		$SRC/pcsx2.png
+}
